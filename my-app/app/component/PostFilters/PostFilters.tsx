@@ -30,7 +30,6 @@ const handleToggle = (value: any)=>{
             <div>
                 {status === "loading" ? (
                     <div className="w-full  centers-element">
-
                         <ClipLoader size={30} color="#00C853" className="flex items-center justify-center"/>
                     </div>
                 ) : status === "error" ? (

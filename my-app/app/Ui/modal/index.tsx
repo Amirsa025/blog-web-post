@@ -2,10 +2,10 @@ import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useState} from 'react'
 import LoginForm from "../../Forms/Login/LoginForm";
 import React from "react"
+import Cookies from "universal-cookie";
 import {storageKeys} from "../../constant/storage-key";
 export default function MyModal() {
     let [isOpen, setIsOpen] = useState(false)
-
     function closeModal() {
         setIsOpen(false)
     }
@@ -21,15 +21,25 @@ export default function MyModal() {
             return   window.localStorage.getItem(key)
         }
     }
+    const getFromCookie = (key?:any) => {
+        const cookies = new Cookies();
+        if (typeof window !== "undefined") {
+            return   cookies.get(key)
+        }
+    }
     const logout = ()=>{
+        const cookies = new Cookies();
         window.localStorage.clear()
+
+        cookies.remove('post-token')
+        cookies.remove('post-refresh-token')
         location.reload()
     }
     return (
         <>
             <div className="flex items-center justify-center">
                 {
-                    getFromStorage(storageKeys.token) && getFromStorage(storageKeys.refreshToken) ?
+                    getFromCookie('post-token') && getFromCookie('post-refresh-token') ?
                         <div className="flex items-center justify-center w-full">
                             <div className={"px-2 "}>{getFromStorage(storageKeys.loginInfo)}</div>
                             <button

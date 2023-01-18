@@ -2,10 +2,13 @@ import axios from "axios";
 
 import {authenticateService} from "./authenticateService"
 import {storageKeys} from "../constant/storage-key";
+import Cookies from "universal-cookie";
 
 const TIMEOUT_DELAY = 30000;//change time with be m second
-
-let token : string | null = localStorage.getItem("token") ?? null;
+const cookies = new Cookies();
+// let token : string | null = localStorage.getItem("token") ?? null;
+// let token : string | null = localStorage.getItem("token") ?? null;
+let token : string | null = cookies.get("token") ?? null;
 const baseApiUrl = 'https://challenge.webjar.ir';
 
 export const setToken = (newToken:string) =>  token = newToken ;
@@ -86,11 +89,11 @@ export default async function baseService(
         if (retry) {
           await authenticateService.logout();
         }
-        const refreshToken : string | null = localStorage.getItem(storageKeys.refreshToken);
+        const refreshToken : string | null = cookies.get(storageKeys.refreshToken);
         let refreshTokenResult:any = await authenticateService.getNewToken(refreshToken);
 
         if (refreshTokenResult && refreshTokenResult.data) {
-          localStorage.setItem(
+          cookies.set(
             "token",
             JSON.stringify(refreshTokenResult.data)
           );
