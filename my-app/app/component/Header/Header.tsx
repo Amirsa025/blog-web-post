@@ -6,12 +6,22 @@ import {navigation} from "../../constant/data";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 
-import CustomBreadcrump from "../../Ui/bread-crumb/breadcrump";
+import CustomBreadcrump from "../../Ui/bread-crumb/NextBreadcrumbs";
+import React from "react";
 const Modal = dynamic(() => import('../../Ui/modal'), {
     ssr: false,
 })
 export default function Header() {
+    const getDefaultTextGenerator = React.useCallback((subPath:any) => {
+        // @ts-ignore
+        return {
+            "product": "محصولات",
+            "blog": "بلاگ",
+            "services": "خدمات",
+        }[subPath]
+    }, [])
     const router = useRouter();
+
     return (
         <div>
             <Disclosure as="nav" className="bg-white  custom-shadow">
@@ -47,7 +57,7 @@ export default function Header() {
                                             height="82"
                                         />
                                     </div>
-                                    <div className="hidden  md:block md:px-[50px] lg:px-[75px]">
+                                    <div className="hidden  md:block  lg:px-[50px]">
                                         <div className="hidden sm:ml-6 sm:block">
                                             <div className="flex space-x-4 text-center">
                                                 {
@@ -74,7 +84,7 @@ export default function Header() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="hidden md:flex md:pl-8 absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                <div className="hidden md:flex  absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                   <Modal/>
 
                                     {/* Profile dropdown */}
@@ -114,8 +124,10 @@ export default function Header() {
                 )}
             </Disclosure>
 
-            <div className={"lg:app-container pt-8"}>
-            <CustomBreadcrump router={router}/>
+            <div className={"lg:app-container px-[1rem] pt-8"}>
+
+             <CustomBreadcrump   getDefaultTextGenerator={getDefaultTextGenerator}
+                                 router={router}/>
             </div>
         </div>
     )

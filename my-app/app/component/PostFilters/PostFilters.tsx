@@ -48,7 +48,6 @@ const handleToggle = (value: any)=>{
                                                     </label>
                                                     <div>
                                                         <div className="checkbox-wrapper ">
-                                                            {/* eslint-disable-next-line react/jsx-no-undef */}
                                                             <Checkbox color="success"
                                                                       sx={{
                                                                           color: "#00C853",

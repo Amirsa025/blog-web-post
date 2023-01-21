@@ -1,9 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import {Fragment, useEffect, useState} from 'react'
-import LoginForm from "../../Forms/Login/LoginForm";
 import React from "react"
 import Cookies from "universal-cookie";
 import {storageKeys} from "../../constant/storage-key";
+import SignForm from "../../Forms/Login-useFormik/signForm";
+import useSignupMutation from "../../Forms/Login-useFormik/useSignupMutation";
 export default function MyModal() {
     let [isOpen, setIsOpen] = useState(false)
     function closeModal() {
@@ -100,7 +101,8 @@ export default function MyModal() {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <div className=" py-[3rem]">
-                                            <LoginForm open={isOpen} setIsOpen={setIsOpen}/>
+
+                                            <SignForm open={isOpen} setIsOpen={setIsOpen}/>
                                         </div>
                                     </div>
                                 </Dialog.Panel>

@@ -65,3 +65,11 @@ body{
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
     border-radius: 15px 0px 0px 15px;
 }
+ol li a {
+    background:transparent!important;
+    font-family: 'IRANYekan', serif;
+}
+ul li button {
+    background:transparent!important;
+    font-family: 'IRANYekan', serif;
+}

@@ -30,9 +30,12 @@ const Crumbs:React.FC<CrumbProps>=({  text: defaultText, textGenerator, href, la
     }
     // All other crumbs will be rendered as links that can be visited
     return (
+
+    <Breadcrumbs separator="›" aria-label="breadcrumb">
         <Link href={href} >
             {text}
         </Link>
+    </Breadcrumbs>
     );
 }
 export default Crumbs

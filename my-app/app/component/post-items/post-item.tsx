@@ -9,18 +9,16 @@ const PostItem:React.FC<PosItem> = ({postItem}) => {
             {
                 postItem?.map((post: any) => {
                     return (
-                        <div className="pt-[100px] flex flex-col md:flex-row" key={post?._id}>
-                            <div className={" w-full centers-element py-2"}>
-                                <Image src="https://challenge.webjar.ir/images/1.jpg" width="300"
-                                       height="288" alt="blogpost" className=""/>
-
-                            </div>
+                        <div className=" flex flex-col md:flex-row md:max-w-6xl my-4 " key={post?._id}>
+                            <img
+                                className=" w-full  h-64 md:h-64 object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+                                src={'https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg'} alt={post?.title} />
                             <div className={"md:pr-[40px]"}>
                                 <div className={"text-center md:text-right"}>
                                     <h5>{post?.title}</h5>
                                 </div>
                                 <div className={"pt-[38px]"}>
-                                    <p className={"text-justify lg:text-height line-clamp-3 lg:pl-[10rem]"}>
+                                    <p className={"text-justify text-[1rem] text-[#373737] font-normal font-thin lg:text-height line-clamp-3 lg:pl-[10rem]"}>
                                         {post?.body}
                                     </p>
                                     <div
