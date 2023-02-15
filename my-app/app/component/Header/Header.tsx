@@ -1,18 +1,20 @@
-import { Disclosure} from '@headlessui/react'
+import {Disclosure} from '@headlessui/react'
 import dynamic from "next/dynamic";
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
 import Image from "next/image";
 import {navigation} from "../../constant/data";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 
 import CustomBreadcrump from "../../Ui/bread-crumb/NextBreadcrumbs";
 import React from "react";
+import NavBarItems from "./nav-bar-items";
+
 const Modal = dynamic(() => import('../../Ui/modal'), {
     ssr: false,
 })
 export default function Header() {
-    const getDefaultTextGenerator = React.useCallback((subPath:any) => {
+    const getDefaultTextGenerator = React.useCallback((subPath: any) => {
         // @ts-ignore
         return {
             "product": "محصولات",
@@ -25,22 +27,24 @@ export default function Header() {
     return (
         <div>
             <Disclosure as="nav" className="bg-white  custom-shadow">
-                {({ open }) => (
+                {({open}) => (
                     <>
                         <div className="lg:app-container py-[26px]">
                             <div className="relative flex h-16 items-center justify-between px-2">
                                 <div className="absolute inset-y-0 left-0 flex items-center md:hidden px-4">
                                     {/* Mobile menu button*/}
-                                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-green-500 hover:text-white focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white">
+                                    <Disclosure.Button
+                                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-green-500 hover:text-white focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
-                                            <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                                            <XMarkIcon className="block h-6 w-6" aria-hidden="true"/>
                                         ) : (
-                                            <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                                            <Bars3Icon className="block h-6 w-6" aria-hidden="true"/>
                                         )}
                                     </Disclosure.Button>
                                 </div>
-                                <div className="flex  items-center px-4 lg:px-0 lg:justify-center sm:items-stretch sm:justify-start">
+                                <div
+                                    className="flex  items-center px-4 lg:px-0 lg:justify-center sm:items-stretch sm:justify-start">
                                     <div className="flex flex-shrink-0 items-center">
                                         <Image
                                             className="block h-8 w-auto lg:hidden"
@@ -60,34 +64,14 @@ export default function Header() {
                                     <div className="hidden  md:block  lg:px-[50px]">
                                         <div className="hidden sm:ml-6 sm:block">
                                             <div className="flex space-x-4 text-center">
-                                                {
-                                                    navigation.map((item, idx) => {
-                                                        return (
-                                                            <div key={idx} className="topnav overflow-hidden md:pl-[2rem] md:px-[0.8rem] lg:pl-[21px] lg:pr-[15px] xl:px-[45px] text-gray-600 hover:text-[#00C853] py-[50px]">
-                                                                <Link href={item.path} legacyBehavior  >
-                                                                    <a
-                                                                        className={` ${
-                                                                            router.pathname === item.path
-                                                                                ? "active pb-[40px]  text-[#00C853] hover:text-[#00C853]"
-                                                                                : "text-[#373737]"
-                                                                        }`}
-                                                                    >
-                                                                        { item.title }
-                                                                    </a>
-
-                                                                </Link>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
+                                                <NavBarItems navigation={navigation}/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="hidden md:flex  absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                  <Modal/>
-
-                                    {/* Profile dropdown */}
+                                <div
+                                    className="hidden md:flex  absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                                    <Modal/>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +83,7 @@ export default function Header() {
                                         navigation.map((item, idx) => {
                                             return (
                                                 <li key={idx} className="px-8  text-gray-600 hover:text-[#00C853] py-4">
-                                                    <Link href={item.path} legacyBehavior  >
+                                                    <Link href={item.path} legacyBehavior>
                                                         <a
                                                             className={` ${
                                                                 router.pathname === item.path
@@ -107,7 +91,7 @@ export default function Header() {
                                                                     : "text-[#373737]"
                                                             }`}
                                                         >
-                                                            { item.title }
+                                                            {item.title}
                                                         </a>
 
                                                     </Link>
@@ -123,11 +107,8 @@ export default function Header() {
                     </>
                 )}
             </Disclosure>
-
             <div className={"lg:app-container px-[1rem] pt-8"}>
-
-             <CustomBreadcrump   getDefaultTextGenerator={getDefaultTextGenerator}
-                                 router={router}/>
+                <CustomBreadcrump getDefaultTextGenerator={getDefaultTextGenerator} router={router}/>
             </div>
         </div>
     )

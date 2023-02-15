@@ -1,9 +1,7 @@
 import axios from "axios";
-
 import {authenticateService} from "./authenticateService"
 import {storageKeys} from "../constant/storage-key";
-import Cookies from "universal-cookie";
-
+import Cookies from "universal-cookie"
 const TIMEOUT_DELAY = 30000;//change time with be m second
 const cookies = new Cookies();
 // let token : string | null = localStorage.getItem("token") ?? null;
@@ -91,7 +89,6 @@ export default async function baseService(
         }
         const refreshToken : string | null = cookies.get(storageKeys.refreshToken);
         let refreshTokenResult:any = await authenticateService.getNewToken(refreshToken);
-
         if (refreshTokenResult && refreshTokenResult.data) {
           cookies.set(
             "token",

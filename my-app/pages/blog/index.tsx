@@ -56,7 +56,7 @@ const Blog:NextPageWithLayout = () => {
             post?.title.toLowerCase().includes(searchTerm)
         )
         setPost(results);
-        refetch().then()
+        refetch()
     }, [refetch, post]);
     return (
         <div className="lg:app-container  lg:pl-[78px] md:px-[3rem] ">

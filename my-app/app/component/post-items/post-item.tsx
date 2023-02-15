@@ -1,9 +1,12 @@
 import React from 'react';
-import Image from "next/image";
+import axios from "axios";
+
 interface PosItem {
     postItem:any
+    data:any[]
 }
-const PostItem:React.FC<PosItem> = ({postItem}) => {
+const PostItem:React.FC<PosItem> = ({postItem,data}) => {
+    // console.log(data)
     return (
         <>
             {
@@ -11,7 +14,7 @@ const PostItem:React.FC<PosItem> = ({postItem}) => {
                     return (
                         <div className=" flex flex-col md:flex-row md:max-w-6xl my-4 " key={post?._id}>
                             <img
-                                className=" w-full  h-64 md:h-64 object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
+                                className=" w-full   h-64 md:h-64 object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
                                 src={'https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg'} alt={post?.title} />
                             <div className={"md:pr-[40px]"}>
                                 <div className={"text-center md:text-right"}>
@@ -61,4 +64,12 @@ const PostItem:React.FC<PosItem> = ({postItem}) => {
     );
 };
 
+
+export async function getServerSideProps() {
+    debugger
+    const response= await axios.get("https://challenge.webjar.ir/posts?skip=10")
+    return {
+        props: { data : response.data._id }// will be passed to the page component as props
+    }
+}
 export default PostItem
